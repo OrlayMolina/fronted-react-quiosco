@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import {toast} from "react-toastify";
 import { categorias as categoriasDB} from "../data/categorias";
 import PropTypes from 'prop-types';
 
@@ -26,8 +27,17 @@ const QuioscoProvider = ({children}) => {
     }
 
     const handleAgregarPedido = ({categoria_id, imagen, ...producto}) => {
-        //Primero toma una copia de pedido y luego agrega un producto nuevo
-        setPedido([...pedido, producto]);
+        
+        if(pedido.some(pedidoState => pedidoState.id === producto.id)){
+            const pedidoActualizado = pedido.map(pedidoState => pedidoState.id === producto.id ? producto : pedidoState);
+            setPedido(pedidoActualizado);
+            toast.success('Actualizado Correctamente');
+            
+        }else {
+            //Primero toma una copia de pedido y luego agrega un producto nuevo
+            setPedido([...pedido, producto]);
+            toast.success('Agregado al Pedido');
+        }
     }
 
     return (

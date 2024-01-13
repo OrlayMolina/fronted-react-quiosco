@@ -5,7 +5,7 @@ export default function ResumenProducto({producto}) {
 
     const { id, nombre, precio, cantidad } = producto;
 
-    return (
+  return (
     <div className="shadow space-y-1 p-4 bg-white">
       <div className="space-y-2">
         <p className="text-xl font-bold">{nombre}</p>
